@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhishingDetector</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body id="root">
+    <div id="result-container">
+      <h1 id="message">검사를 시작합니다.</h1>
+    </div>
+
+    <div id="bottom-container">
+      <p id="percentage"></p>
+      <p id="question">피싱 사이트 확률은 어떻게 계산되는 건가요?</p>
+      <p id="question">확률은 머신 러닝을 통해 학습된 종합적인 요소에 근거하여 계산됩니다!</p>
+      <ul id="reason-container">
+        <li id="reason-1"></li>
+        <li id="reason-2"></li>
+        <li id="reason-3"></li>
+      </ul>
+    </div>
+  </body>
+
+  <script>
+    const probability = 83; // 예시 값, 실제로는 background.js에서 받아온 값을 사용
+    const reasons = ['HTTPS 사용 여부', '클라우드 도메인 사용 여부', '그 외 기타 등등']; // 예시 값
+
+    const resultContainer = document.getElementById('result-container');
+    const message = document.getElementById('message');
+    const percentage = document.getElementById('percentage');
+
+    if (probability > 70) {
+      resultContainer.style.backgroundColor = '#cd0000';
+      message.innerHTML = '🚫 현재 사이트는 피싱 사이트일 확률이 높습니다!';
+      percentage.innerHTML = `피싱 사이트 확률: ${probability}%`;
+    } else {
+      resultContainer.style.backgroundColor = '#64cd3c';
+      message.innerHTML = '✅ 현재 사이트는 안전한 사이트일 확률이 높습니다!';
+      percentage.innerHTML = `피싱 사이트 확률: ${probability}%`;
+    }
+
+    const reason1 = document.getElementById('reason-1');
+    const reason2 = document.getElementById('reason-2');
+    const reason3 = document.getElementById('reason-3');
+
+    reason1.innerHTML = `1. ${reasons[0]}`;
+    reason2.innerHTML = `2. ${reasons[1]}`;
+    reason3.innerHTML = `3. ${reasons[2]}`;
+  </script>
+</html>
